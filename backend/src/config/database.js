@@ -12,7 +12,10 @@ export function getPool() {
       port: env.db.port,
       user: env.db.user,
       password: env.db.password,
-      database: env.db.name,
+database: env.db.name,
+ssl: {
+  rejectUnauthorized: true
+},
       waitForConnections: true,
       connectionLimit: env.db.connectionLimit,
       queueLimit: 0,
