@@ -1,3 +1,8 @@
+import { readFileSync } from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 import mysql from 'mysql2/promise';
 import env from './env.js';
 
@@ -14,6 +19,10 @@ export function getPool() {
       password: env.db.password,
 database: env.db.name,
 ssl: {
+  ca: readFileSync(
+    path.resolve(__dirname, '../../certs/aiven-ca.pem'),
+    'utf8'
+  ),
   rejectUnauthorized: true
 },
       waitForConnections: true,
